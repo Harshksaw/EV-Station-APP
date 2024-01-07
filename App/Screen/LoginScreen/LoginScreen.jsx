@@ -1,11 +1,11 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity } from "react-native";
+import { View, Text, StyleSheet, Image, TouchableOpacity, SafeAreaView } from "react-native";
 import React from "react";
-import Color from "../utils/Color";
+import Color from "../../utils/Color.js";
 
-import { useWarmUpBrowser } from "../../hooks/warmupbrowser.js";
+import { useWarmUpBrowser } from "../../../hooks/warmupbrowser.js";
 import * as WebBrowser from "expo-web-browser";
-// import LinearGradient from 'react-native-linear-gradient';
-import { LinearGradient } from 'expo-linear-gradient';
+
+
 import { useSignIn } from "@clerk/clerk-expo";
 import { useOAuth } from "@clerk/clerk-expo";
 export default function LoginScreen() {
@@ -32,12 +32,14 @@ export default function LoginScreen() {
 
 
   return (
+    <SafeAreaView>
     <View
       style={{
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
         flexDirection: "column",
+        height: "100%",
         // backgroundColor: Color.GRAY,
       }}
     >
@@ -51,7 +53,7 @@ export default function LoginScreen() {
       >
         <Text
           style={{
-            fontSize: 24,
+            fontSize: 20,
             fontWeight: "bold",
             color: "gray",
             marginRight: 10,
@@ -61,7 +63,7 @@ export default function LoginScreen() {
         </Text>
         <Image
           style={styles.logoImage}
-          source={require("../../assets/images/logo.jpeg")}
+          source={require("../../../assets/images/logo.jpeg")}
         />
         <Text
           style={{
@@ -76,7 +78,7 @@ export default function LoginScreen() {
       </View>
       <Image
         style={styles.bgImage}
-        source={require("../../assets/images/herosec.jpeg")}
+        source={require("../../../assets/images/herosec.jpeg")}
       />
 
       <View>
@@ -130,6 +132,7 @@ export default function LoginScreen() {
 
       </TouchableOpacity>
     </View>
+    </SafeAreaView>
   );
 }
 
@@ -141,7 +144,7 @@ const styles = StyleSheet.create({
   },
   bgImage: {
     width: "100%",
-    height: "60%",
+    height: "40%",
 
     resizeMode: "cover",
     justifyContent: "center",
