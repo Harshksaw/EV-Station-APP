@@ -1,12 +1,10 @@
-import React, { Component } from 'react'
-import { Text, View } from 'react-native'
+import React from 'react';
+import { View, Text } from 'react-native';
 
-export default class FavouriteScreen extends Component {
-  render() {
-    return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-            <Text>Welcome to the Home Screen!</Text>
-        </View>
-    )
-  }
+export default function FavScreen() {
+  return (
+    <View>
+      <Text>fav screen</Text>
+     </View>
+  );
 }

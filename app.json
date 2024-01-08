@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "Ev-Charging-Station",
-    "slug": "Ev-Charging-Station",
+    "name": "EV-Station-APP",
+    "slug": "ev",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -25,6 +25,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "8cb93994-fafd-4e9c-b83f-fff8814cc7db"
+      }
+    },
+    "owner": "harsh10021"
   }
 }

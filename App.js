@@ -1,15 +1,15 @@
-import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, StyleSheet, Text, View } from 'react-native';
-
-import { ClerkProvider, SignedIn, SignedOut  } from "@clerk/clerk-expo";
-import * as SecureStore from "expo-secure-store";
-import { NavigationContainer } from '@react-navigation/native';
-import MyTabs from './App/Navigation/TabNaviagtion';
-import * as SplashScreen from 'expo-splash-screen';
 import { useCallback } from 'react';
+import { StatusBar } from 'expo-status-bar';
+import { StyleSheet, Text, View } from 'react-native';
 import { useFonts } from 'expo-font';
-import Mytabs from './App/Navigation/TabNaviagtion';
+import * as SplashScreen from 'expo-splash-screen';
 import LoginScreen from './App/Screen/LoginScreen/LoginScreen';
+import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
+import * as SecureStore from "expo-secure-store";
+
+
+import HomeScreen from './App/Screen/HomeScreen/HomeScreen';
+
 const tokenCache = {
   async getToken(key) {
     try {
@@ -27,6 +27,7 @@ const tokenCache = {
   },
 };
 
+SplashScreen.preventAutoHideAsync();
 
 export default function App() {
 
@@ -36,40 +37,35 @@ export default function App() {
 
   });
 
-
   const onLayoutRootView = useCallback(async () => {
     if (fontsLoaded) {
       await SplashScreen.hideAsync();
     }
   }, [fontsLoaded]);
-  
+
   if (!fontsLoaded) {
     return null;
   }
-  
- 
 
   return (
     <ClerkProvider
-    tokenCache={tokenCache}
-    publishableKey={'pk_test_bW9kZXJuLWNvbGxpZS05LmNsZXJrLmFjY291bnRzLmRldiQ'}>
-    <View onLayout={onLayoutRootView}>
-      
-      <SignedIn>
-        <NavigationContainer>
-          <MyTabs/>
-        </NavigationContainer>
-      </SignedIn>
+      tokenCache={tokenCache}
+      publishableKey={'pk_test_bW9kZXJuLWNvbGxpZS05LmNsZXJrLmFjY291bnRzLmRldiQ'}>
+      <View style={styles.container} onLayout={onLayoutRootView}>
 
-      <SignedOut>
-      <LoginScreen/>
-      </SignedOut>
+        <SignedIn>
+          <HomeScreen />
+        </SignedIn>
+
+        <SignedOut>
+
+          <LoginScreen />
+        </SignedOut>
 
 
-      <StatusBar style="auto" />
-    </View>
-  </ClerkProvider>
-
+        <StatusBar style="auto" />
+      </View>
+    </ClerkProvider>
   );
 }
 
@@ -77,19 +73,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: '#fff',
-    flexDirection: 'column',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  text: {
-    fontSize: 24,
-    fontWeight: 'bold',
-    textAlign: 'center',
+    paddingTop: 25,
+
   },
 });
-
-
-
-        
-
-

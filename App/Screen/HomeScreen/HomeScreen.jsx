@@ -1,11 +1,19 @@
 import React from 'react'
-
+import { useNavigationState } from '@react-navigation/native';
 import { View, Text } from 'react-native';
+import { SafeAreaView } from 'react-native-safe-area-context';
 
-export const HomeScreen = () => {
+ const HomeScreen = () => {
+
+
+
     return (
-        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', color:"black" }}>
-            <Text>Welcome to the Home Screen!</Text>
-        </View>
+        <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center', backgroundColor:"blue" }}>
+      <Text>Feed!</Text>
+      <Text>Feed!</Text>
+      <Text>Feed!</Text>
+      <Text>Feed!</Text>
+    </View>
     );
 }
+export default HomeScreen;
