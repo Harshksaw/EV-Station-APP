@@ -9,6 +9,8 @@ import { View } from 'react-native';
 import { Text } from 'react-native';
 import FavScreen from '../Screen/FavouriteScreen/FavouriteScreen';
 import ProfileScreen from '../Screen/ProfileScreen/ProfileScreen';
+import App from '../../App';
+
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -31,8 +33,8 @@ function MyTabs() {
             <NavigationContainer>
               <Tab.Navigator screenOptions={screenOptions}>
               <Tab.Screen
-                 name='Search' 
-                 component={FavScreen}
+                 name='Home' 
+                 component={HomeScreen}
                  options={
                   {tabBarIcon : ({focused})=>{
                     return(
@@ -47,14 +49,14 @@ function MyTabs() {
                  }
                  />
              
-                <Tab.Screen name='Home' 
-                component={HomeScreen}
+                <Tab.Screen name='Favourite' 
+                component={FavScreen}
                 options={
                   {tabBarIcon : ({focused})=>{
                     return(
                       <View style={{alignItems:'center' , justifyContent:'center'}}>
                      <FontAwesome5 name="heart" size={24} color={focused?'red':'green'} />
-                      <Text style={{fontSize:10 , color:"black"}}>Portfolio</Text>
+                      <Text style={{fontSize:10 , color:"black"}}>Fav</Text>
                       </View>
                     )
                     
