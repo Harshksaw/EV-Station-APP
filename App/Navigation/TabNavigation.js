@@ -7,6 +7,8 @@ import { AntDesign } from '@expo/vector-icons';
 import HomeScreen from '../Screen/HomeScreen/HomeScreen';
 import { View } from 'react-native';
 import { Text } from 'react-native';
+import FavScreen from '../Screen/FavouriteScreen/FavouriteScreen';
+import ProfileScreen from '../Screen/ProfileScreen/ProfileScreen';
 
 const Tab = createBottomTabNavigator();
 const screenOptions = {
@@ -28,6 +30,22 @@ function MyTabs() {
 
             <NavigationContainer>
               <Tab.Navigator screenOptions={screenOptions}>
+              <Tab.Screen
+                 name='Search' 
+                 component={FavScreen}
+                 options={
+                  {tabBarIcon : ({focused})=>{
+                    return(
+                      <View style={{alignItems:'center' , justifyContent:'center'}}>
+                            <FontAwesome5 name="search" size={24} color={focused?'red':'green'} />
+
+                      <Text style={{fontSize:10 , color:"black"}}>Search</Text>
+                      </View>
+                    )
+                    
+                  }}
+                 }
+                 />
              
                 <Tab.Screen name='Home' 
                 component={HomeScreen}
@@ -35,28 +53,30 @@ function MyTabs() {
                   {tabBarIcon : ({focused})=>{
                     return(
                       <View style={{alignItems:'center' , justifyContent:'center'}}>
-                     <FontAwesome5 name="portrait" size={24} color={focused?'red':'green'} />
-                      <Text style={{fontSize:12 , color:"black"}}>Portfolio</Text>
+                     <FontAwesome5 name="heart" size={24} color={focused?'red':'green'} />
+                      <Text style={{fontSize:10 , color:"black"}}>Portfolio</Text>
                       </View>
                     )
                     
                   }}
                  }
                 />
-                {/* <Tab.Screen name='Prices' 
-                component={HomeScreen}
+
+                
+                <Tab.Screen name='Profile' 
+                component={ProfileScreen}
                 options={
                   {tabBarIcon : ({focused})=>{
                     return(
                       <View style={{alignItems:'center' , justifyContent:'center'}}>
-                     <Entypo name="price-tag" size={24} color={focused?'red':'green'} />
-                      <Text style={{fontSize:12 , color:"black"}}>Prices</Text>
+                        <FontAwesome5 name="portrait" size={24} color={focused?'red':'green'} />
+                      <Text style={{fontSize:12 , color:"black"}}>Profile</Text>
                       </View>
                     )
                     
                   }}
                  }
-                /> */}
+                />
 
               </Tab.Navigator>
             </NavigationContainer>
@@ -67,18 +87,4 @@ function MyTabs() {
 export default MyTabs;
 
 
-   <Tab.Screen
-                 name='Home' 
-                 component={HomeScreen}
-                 options={
-                  {tabBarIcon : ({focused})=>{
-                    return(
-                      <View style={{alignItems:'center' , justifyContent:'center'}}>
-                      <Entypo name="home" size={24} color={focused?'red':'green'} />
-                      <Text style={{fontSize:12 , color:"black"}}>Home</Text>
-                      </View>
-                    )
-                    
-                  }}
-                 }
-                 />
+  

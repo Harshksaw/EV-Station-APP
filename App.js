@@ -8,7 +8,9 @@ import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
 import * as SecureStore from "expo-secure-store";
 
 
-import HomeScreen from './App/Screen/HomeScreen/HomeScreen';
+import { NavigationContainer } from '@react-navigation/native';
+import MyTabs from "./App/Navigation/TabNavigation";
+
 
 const tokenCache = {
   async getToken(key) {
@@ -54,7 +56,11 @@ export default function App() {
       <View style={styles.container} onLayout={onLayoutRootView}>
 
         <SignedIn>
-          <HomeScreen />
+
+
+          <MyTabs />
+
+
         </SignedIn>
 
         <SignedOut>

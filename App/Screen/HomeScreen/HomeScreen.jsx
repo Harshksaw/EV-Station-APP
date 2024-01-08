@@ -12,7 +12,7 @@ import { SafeAreaView } from 'react-native-safe-area-context';
       <Text>Feed!</Text>
       <Text>Feed!</Text>
       <Text>Feed!</Text>
-      <Text>Feed!</Text>
+
     </View>
     );
 }
