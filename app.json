@@ -32,5 +32,13 @@
       }
     },
     "owner": "harsh10021"
-  }
+  },
+  "plugins": [
+    [
+      "expo-location",
+      {
+        "locationAlwaysAndWhenInUsePermission": "Allow Ev Station to use your location."
+      }
+    ]
+  ]
 }
