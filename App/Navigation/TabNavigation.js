@@ -2,14 +2,14 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { Entypo } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import { Feather } from '@expo/vector-icons';
-import { AntDesign } from '@expo/vector-icons';
+// import { Feather } from '@expo/vector-icons';
+// import { AntDesign } from '@expo/vector-icons';
 import HomeScreen from '../Screen/HomeScreen/HomeScreen';
 import { View } from 'react-native';
 import { Text } from 'react-native';
 import FavScreen from '../Screen/FavouriteScreen/FavouriteScreen';
 import ProfileScreen from '../Screen/ProfileScreen/ProfileScreen';
-import App from '../../App';
+// import App from '../../App';
 
 
 const Tab = createBottomTabNavigator();
