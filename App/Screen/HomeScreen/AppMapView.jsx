@@ -9,7 +9,7 @@ function AppMapView() {
 
     const {location , setLocation} = useContext(UserLocationContext);
 
-    console.log("loc", location)
+    // console.log("loc", location)
 
 
 
