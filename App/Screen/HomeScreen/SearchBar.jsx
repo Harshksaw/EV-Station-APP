@@ -30,7 +30,7 @@ const SearchBar = ({ searchedLocation }) => {
           searchedLocation(details?.geometry?.location)
         }}
         query={{
-          key: 'AIzaSyDVLJFRArQ8mG3r2daEZTtVOgsitJqRxhA',
+          key: 'AIzaSyB9ctiAb-J9CZil_ZlpAg3ZOXpxwudHlNw',
           language: 'en',
         }}
       />

@@ -19,8 +19,9 @@ function AppMapView() {
         <MapView style={styles.map} 
         customMapStyle={MapViewStyle}
         region={{
-          latitude:location?.latitude,
-          longitude:location?.longitude,
+          // latitude:location?.latitude,
+          latitude:40.70,
+          longitude: -73.92,
           latitudeDelta:0.0422,
           longitudeDelta:0.0421,
         }}
@@ -31,8 +32,10 @@ function AppMapView() {
         <Marker
         coordinate={{
 
-          latitude:location?.latitude,
-          longitude:location?.longitude,
+          // latitude:location?.latitude,
+          // longitude:location?.longitude,
+          latitude:40.70,
+          longitude: -73.92,
         }}
 
         >
