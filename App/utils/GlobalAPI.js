@@ -30,6 +30,7 @@ const NewNearByPlace = async (data) => {
 };
 
 export default {
-    NewNearByPlace
+    NewNearByPlace ,
+    API_KEY
 
 };

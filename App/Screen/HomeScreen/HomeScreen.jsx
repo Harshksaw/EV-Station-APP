@@ -22,20 +22,23 @@ export default function HomeScreen() {
 
   }, [location])
 
-  const GetNearByPlace=()=>{
-    const data={
+  const GetNearByPlace = () => {
+    const data = {
       "includedTypes": ["electric_vehicle_charging_station"],
-  "maxResultCount": 10,
-  "locationRestriction": {
-    "circle": {
-      "center": {
-        latitude:40.70,
-        longitude: -73.92 },
-        // "latitude": location?.latitude,
+      "maxResultCount": 10,
+      "locationRestriction": {
+        "circle": {
+          "center": {
+            latitude: 40.70,
+            longitude: -73.92
+          },
+          // "latitude": location?.latitude,
 
-        // "longitude": location?.longitude},
-      "radius": 5000.0
-    }}}
+          // "longitude": location?.longitude},
+          "radius": 5000.0
+        }
+      }
+    }
     GlobalAPI.NewNearByPlace(data)
       .then((resp) => {
         // console.log("getnearByPlace")
@@ -56,7 +59,7 @@ export default function HomeScreen() {
       <AppMapView />
       <View style={StyleSheet.placeListContainer}>
 
-        <PlaceListView placeList={placeList}/> 
+        <PlaceListView placeList={placeList} />
       </View>
     </View>
   );
@@ -74,11 +77,11 @@ const StyleSheet = ({
 
 
   },
-  placeListContainer:{
-    position:"absolute",
+  placeListContainer: {
+    position: "absolute",
     bottom: 0,
     zIndex: 10,
-    width:"100%",
-    paddingHorizontal:20
+    width: "100%",
+    paddingHorizontal: 20
   }
 })
