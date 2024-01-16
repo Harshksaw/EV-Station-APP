@@ -10,17 +10,15 @@ import GlobalAPI from "../../utils/GlobalAPI";
 import PlaceListView from "./PlaceListView";
 
 
-
-
-
-
 export default function HomeScreen() {
   const { location, setLocation } = useContext(UserLocationContext)
 
-  const [placeList, setPlaceList] = useState([]);
+  const [placeList, setPlaceList] = useState({});
+  console.log(placeList)
 
   useEffect(() => {
-    location &&     GetNearByPlace();
+    // location &&     GetNearByPlace();
+    GetNearByPlace();
 
   }, [location])
 
@@ -40,9 +38,10 @@ export default function HomeScreen() {
     }}}
     GlobalAPI.NewNearByPlace(data)
       .then((resp) => {
-        console.log("getnearByPlace")
-        console.log(JSON.stringify(resp?.data));
-        // setPlaceList(resp.data.places)
+        // console.log("getnearByPlace")
+        const response = JSON.stringify(resp)
+
+        setPlaceList(resp.places)
       })
   }
 

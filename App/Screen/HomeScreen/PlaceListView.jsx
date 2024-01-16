@@ -1,19 +1,34 @@
 import React from 'react'
-import { FlatList, View } from 'react-native'
+import { FlatList, Text, View } from 'react-native'
 import PlaceItem from './PlaceItem'
 
 
 const PlaceListView = ({placeList}) => {
 
+  const debug = ()=>{
+
+    console.log("placelist" ,placeList)
+    {placeList.map((item, idx)=>{
+      console.log("item" ,item)
+    })
+  }
+  debug();
+}
+
   return (
     <View>
+
         <FlatList
         data={placeList} 
         horizontal={true}
 
-        renderItem={({item, index})=>(
+        renderItem={({place, index})=>(
+                
             <View key={index}> 
-                <PlaceItem place={item} />
+                {/* <PlaceItem place={place} /> */}
+                <View>
+                  <Text>place</Text>
+            </View>
             </View>
         )}
         />
