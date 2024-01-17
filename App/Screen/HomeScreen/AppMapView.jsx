@@ -3,9 +3,10 @@ import MapView, {Marker} from 'react-native-maps';
 import { Image, StyleSheet, View } from 'react-native';
 import MapViewStyle from '../../utils/MapViewStyle.json'
 import { UserLocationContext } from '../../Context/UserLocationContext';
+import Markers from './Markers';
 
 
-function AppMapView() {
+function AppMapView({placeList}) {
 
     const {location , setLocation} = useContext(UserLocationContext);
 
@@ -40,7 +41,14 @@ function AppMapView() {
 
         >
           <Image source={require('../../../assets/images/car.png')} style={{width:60 , height:60}} />
-        </Marker>
+
+
+          {placeList && placeList.map((item, index)=>(
+            <Markers key = {index} place ={item} index ={index}/>
+            ))}
+
+
+            </Marker>
         </MapView>
 
         </View>

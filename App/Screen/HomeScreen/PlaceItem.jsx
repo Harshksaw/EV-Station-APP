@@ -55,7 +55,7 @@ export default function PlaceItem({ place }) {
                     // fontFamily:'outfit-Light',
                     fontSize: 20,
                     marginTop: 2,
-                }}>{place?.evChargeOptions?.connectorCount} Points</Text>
+                }}>  { (place?.evChargeOptions?.connectorCount) ? place?.evChargeOptions?.connectorCount : 0  }  Points</Text>
 
                 <View style={{ padding: 12, backgroundColor: Color.PRIMARY, borderRadius: 6, paddingHorizontal: 14 }}>
 
