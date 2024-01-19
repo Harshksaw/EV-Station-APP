@@ -1,12 +1,32 @@
-import { View, Text, Image, Dimensions } from 'react-native'
+import { View, Text, Image, Dimensions, Pressable, ToastAndroid } from 'react-native'
 import React from 'react'
 import Color from "../../utils/Color";
 import GlobalApi from '../../utils/GlobalAPI';
 import { LinearGradient } from 'expo-linear-gradient';
-import { FontAwesome } from '@expo/vector-icons';
+import { FontAwesome, Ionicons } from '@expo/vector-icons';
+
+import {app} from '../../utils/FirebaseConfig';
+import {doc, getFirestore, setDoc} from "firebase/firestore";
+import { useUser } from '@clerk/clerk-expo';
+
+
 
 export default function PlaceItem({ place }) {
     const PLACE_PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
+    const {user} = useUser();
+
+    const db = getFirestore(app);
+    const setFavourite =async (place) => {
+        console.log("Favourite")
+        await setDoc(doc(db, "evfavplace", (place.id).toString()), {
+            place: place,
+            email: user?.primaryEmailAddress?.emailAddress,
+
+        })
+        ToastAndroid.show("Added to Favourite", ToastAndroid.TOP);
+
+
+    }
     return (
         <View style={{
             backgroundColor: Color.WHITE,
@@ -24,6 +44,10 @@ export default function PlaceItem({ place }) {
                     ? `${PLACE_PHOTO_BASE_URL}${place?.photos[0]?.name}/media?key=${GlobalApi.API_KEY}&maxHeightPx=800&maxWidthPx=1200`
                     : 'Default Image URL'
             )} */}
+                <Pressable onPress={() => setFavourite(place)}>
+
+                 <Ionicons name="ios-heart" size={24} color="gray"  style={{ position: 'absolute', top: 15, right: 15, zIndex: 1 }} />
+                </Pressable>
 
             <Image source={
                 place?.photos ? 

@@ -12,7 +12,7 @@ const config = {
             'places.formattedAddress',
             'places.location',
             'places.evChargeOptions',
-            'places.photos'
+            'places.photos', 'places.id'
         ]
     }
 };
