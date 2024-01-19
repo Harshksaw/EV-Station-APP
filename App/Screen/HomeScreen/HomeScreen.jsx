@@ -14,7 +14,7 @@ export default function HomeScreen() {
   const { location, setLocation } = useContext(UserLocationContext)
 
   const [placeList, setPlaceList] = useState({});
-  console.log(placeList)
+  // console.log("placeList ->" ,placeList)
 
   useEffect(() => {
     // location &&     GetNearByPlace();
@@ -57,7 +57,9 @@ export default function HomeScreen() {
         <SearchBar searchedLocation={(location) => console.log(location)} />
       </View>
        {/* //contion placelist ?&& */}
-       <AppMapView placeList={placeList} />
+
+       {placeList && <AppMapView placeList={placeList} />
+       }
       <View style={StyleSheet.placeListContainer}>
 
         <PlaceListView placeList={placeList} />
