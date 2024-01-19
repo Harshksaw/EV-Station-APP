@@ -85,7 +85,7 @@ export default function App() {
       tokenCache={tokenCache}
       publishableKey={'pk_test_bW9kZXJuLWNvbGxpZS05LmNsZXJrLmFjY291bnRzLmRldiQ'}>
 
-      <UserLocationContext.Provider value={{location}}  >
+      <UserLocationContext.Provider value={{location, setLocation}}  >
         <View style={styles.container} onLayout={onLayoutRootView}>
 
           <SignedIn>

@@ -8,83 +8,77 @@ import SearchBar from "./SearchBar";
 import { UserLocationContext } from "../../Context/UserLocationContext";
 import GlobalAPI from "../../utils/GlobalAPI";
 import PlaceListView from "./PlaceListView";
-
+import { SelectMarkerContext } from "../../Context/SelectMarkerContext";
 
 export default function HomeScreen() {
-  const { location, setLocation } = useContext(UserLocationContext)
+  const { location, setLocation } = useContext(UserLocationContext);
 
-  const [placeList, setPlaceList] = useState({});
-  // console.log("placeList ->" ,placeList)
+  const [placeList, setPlaceList] = useState([]);
 
+  const [SelectedMarker, setSelectedMarker] = useState([]);
   useEffect(() => {
     // location &&     GetNearByPlace();
     GetNearByPlace();
-
-  }, [location])
+  }, [location]);
 
   const GetNearByPlace = () => {
     const data = {
-      "includedTypes": ["electric_vehicle_charging_station"],
-      "maxResultCount": 10,
-      "locationRestriction": {
-        "circle": {
-          "center": {
-            latitude: 40.70,
-            longitude: -73.92
-          },
-          // "latitude": location?.latitude,
+      includedTypes: ["electric_vehicle_charging_station"],
+      maxResultCount: 10,
+      locationRestriction: {
+        circle: {
+          center: {
+           
+               latitude:location?.latitude,
+               longitude:location?.longitude
 
-          // "longitude": location?.longitude},
-          "radius": 5000.0
+
+          },
+          radius: 5000.0
         }
       }
-    }
+    };
     GlobalAPI.NewNearByPlace(data)
       .then((resp) => {
-        // console.log("getnearByPlace")
-        const response = JSON.stringify(resp)
-
-        setPlaceList(resp.places)
-      })
-  }
-
-
+        const response = JSON.stringify(resp);
+        setPlaceList(resp.places);
+      });
+  };
 
   return (
-    <View>
-      <View style={StyleSheet.headerContainer}>
-        <Header />
-        <SearchBar searchedLocation={(location) => console.log(location)} />
-      </View>
-       {/* //contion placelist ?&& */}
+    <SelectMarkerContext.Provider value={{ SelectedMarker, setSelectedMarker }}>
+      <View>
+        <View style={styles.headerContainer}>
+          <Header />
+          <SearchBar searchedLocation={(location) => setLocation({
+            latitude: location.lat,
+            longitude: location.lng,
+          })} />
+        </View>
 
-       {placeList && <AppMapView placeList={placeList} />
-       }
-      <View style={StyleSheet.placeListContainer}>
+        {placeList && <AppMapView placeList={placeList} />}
 
-        <PlaceListView placeList={placeList} />
+        <View style={styles.placeListContainer}>
+          {placeList && <PlaceListView placeList={placeList} />}
+        </View>
       </View>
-    </View>
+    </SelectMarkerContext.Provider>
   );
-};
+}
 
-
-const StyleSheet = ({
+const styles = {
   headerContainer: {
     position: "absolute",
     zIndex: 10,
     padding: 20,
     width: "100%",
     paddingHorizontal: 20,
-
-
-
   },
   placeListContainer: {
     position: "absolute",
     bottom: 0,
     zIndex: 10,
     width: "100%",
-    paddingHorizontal: 20
-  }
-})
+    paddingHorizontal: 20,
+  },
+};

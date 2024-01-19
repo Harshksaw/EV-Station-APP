@@ -10,42 +10,39 @@ function AppMapView({placeList}) {
 
     const {location , setLocation} = useContext(UserLocationContext);
 
-    console.log("placeList->>", placeList[1].location)
-    console.log("location", location)
+    // console.log("placeList->>", placeList[1].location)
+    // console.log("location", location)
 
 
 
-    return location?.latitude && (
+    // return location?.latitude && (
+    return (
       <View>
 
         <MapView style={styles.map} 
         customMapStyle={MapViewStyle}
         region={{
-          // latitude:placeList[1].location.latitude,
-            // longitude:placeList[1].location.longitude,
-          latitude:40.70,
-          longitude: -73.92,
+          latitude:location?.latitude,
+          longitude:location?.longitude,
           latitudeDelta:0.0422,
           longitudeDelta:0.0421,
+  
         }}
         
 
 
         >
-        <Marker
-        coordinate={{
-
-          // latitude:placeList[1].location.latitude,
-          // longitude:placeList[1].location.longitude,
-          latitude:40.70,
-          longitude: -73.92,
-        }}
-
+          {location? <Marker
+         coordinate={{
+          latitude:location?.latitude,
+          longitude:location?.longitude
+         }}
         >
           <Image source={require('../../../assets/images/car.png')} style={{width:60 , height:60}} />
 
-          </Marker>
-          {placeList && placeList.map((place, index)=>(
+          </Marker> : null}
+
+          { placeList.map((place, index)=>(
 
 
 

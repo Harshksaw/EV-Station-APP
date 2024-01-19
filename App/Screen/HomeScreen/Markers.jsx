@@ -1,8 +1,12 @@
+import { useContext } from "react";
 import { Image, Text, View } from "react-native"
 import { Marker } from "react-native-maps"
-
+import { SelectMarkerContext } from "../../Context/SelectMarkerContext";
 const Markers = ({place , index}) =>{
-    console.log(place.location)
+
+  console.log(place.location)
+  const {SelectedMarker,setSelectedMarker}=useContext(SelectMarkerContext);
+
     return place&&(
       <Marker
            coordinate={{
