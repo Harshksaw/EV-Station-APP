@@ -11,22 +11,37 @@ import { useUser } from '@clerk/clerk-expo';
 
 
 
-export default function PlaceItem({ place }) {
+export default function PlaceItem({ place, isFav, markedFav }) {
     const PLACE_PHOTO_BASE_URL = "https://places.googleapis.com/v1/";
     const {user} = useUser();
 
     const db = getFirestore(app);
     const setFavourite =async (place) => {
-        console.log("Favourite")
-        await setDoc(doc(db, "evfavplace", (place.id).toString()), {
-            place: place,
-            email: user?.primaryEmailAddress?.emailAddress,
+        await setDoc(doc(db, "ev-fav-place", (place.id).toString()),{ 
+            place: place, 
+            email: user?.primaryEmailAddress.emailAddress
+            }
+            );
+            markedFav()
+            ToastAndroid.show("Favorite Added!", ToastAndroid.TOP);
+          }
+        
+        
 
-        })
-        ToastAndroid.show("Added to Favourite", ToastAndroid.TOP);
+  const onRemoveFav = async (placeId) => {
+    await deleteDoc(doc(db, "evfavplace", placeId.toString()));
+    ToastAndroid.show("Favorite Removed", ToastAndroid.TOP);
+    markedFav()
+  }
 
+  const onDirectionClick = () => {
+    const url = Platform.select({
+      ios: "maps:"+place.location.latitude+","+place?.location?.longitude+"?q="+place?.formattedAddress,
+      android: "geo:"+place.location.latitude+","+place?.location?.longitude+"?q="+place?.formattedAddress
+    });
+    Linking.openURL(url);
+  }
 
-    }
     return (
         <View style={{
             backgroundColor: Color.WHITE,
@@ -44,10 +59,15 @@ export default function PlaceItem({ place }) {
                     ? `${PLACE_PHOTO_BASE_URL}${place?.photos[0]?.name}/media?key=${GlobalApi.API_KEY}&maxHeightPx=800&maxWidthPx=1200`
                     : 'Default Image URL'
             )} */}
-                <Pressable onPress={() => setFavourite(place)}>
 
-                 <Ionicons name="ios-heart" size={24} color="gray"  style={{ position: 'absolute', top: 15, right: 15, zIndex: 1 }} />
-                </Pressable>
+
+                <Pressable onPress={() => setFavourite(place)}>
+            {isFav ? 
+
+<Ionicons name="ios-heart" size={24} color="red"  style={{ position: 'absolute', top: 15, right: 15, zIndex: 1 }} /> :
+                 <Ionicons name="ios-heart" size={24} color="gray"  style={{ position: 'absolute', top: 15, right: 15, zIndex: 1 }} /> 
+                }
+                </Pressable> 
 
             <Image source={
                 place?.photos ? 
@@ -81,11 +101,11 @@ export default function PlaceItem({ place }) {
                     marginTop: 2,
                 }}>  { (place?.evChargeOptions?.connectorCount) ? place?.evChargeOptions?.connectorCount : 0  }  Points</Text>
 
-                <View style={{ padding: 12, backgroundColor: Color.PRIMARY, borderRadius: 6, paddingHorizontal: 14 }}>
-
-                    <FontAwesome name="location-arrow" size={25} color="white" />
-
-                </View>
+              
+                <Pressable onPress={() => onDirectionClick()}
+           style={{padding: 12, backgroundColor: "red", borderRadius: 6, paddingHorizontal: 14}}>
+            <FontAwesome name="location-arrow" size={25} color="white" />
+          </Pressable>
 
             </View>
 
